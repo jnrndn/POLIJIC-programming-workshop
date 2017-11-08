@@ -5,13 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * ConnectionService class
+ * <strong>ConnectionService</strong> class <br>
  * We're gonna use this class
  * as a service to connect and 
  * desconnect our Data Base
  * <br>
  * @author Juan José Rendón
- * @version 1.0, November 2017.
+ * @version 0.1.0, November 2017.
  * 
  */
 public class ConnectionService {
