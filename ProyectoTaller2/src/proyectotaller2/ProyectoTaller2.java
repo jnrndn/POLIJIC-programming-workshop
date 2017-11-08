@@ -1,6 +1,6 @@
 package proyectotaller2;
 
-import connectionService.ConnectionService;
+import Services.ConnectionService;
 
 public class ProyectoTaller2 {
 
