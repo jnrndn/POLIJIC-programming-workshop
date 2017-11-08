@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * <strong>ConnectionService</strong> class <br>
- * We're gonna use this class
+ * This class is gonna be used
  * as a service to connect and 
  * desconnect our Data Base
  * <br>
