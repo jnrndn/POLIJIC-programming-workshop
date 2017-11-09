@@ -1,11 +1,13 @@
 package proyectotaller2;
 
-import Services.ConnectionService;
+import BackEnd.Student;
 
 public class ProyectoTaller2 {
 
     public static void main(String[] args) {
-        ConnectionService.connect();
+        
+        Student stud = new Student();
+        stud.getStudent(1152456846);
     }
     
 }
