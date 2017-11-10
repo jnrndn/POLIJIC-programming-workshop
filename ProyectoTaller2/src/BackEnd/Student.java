@@ -69,7 +69,11 @@ public class Student {
         ResultSet rs = QueryService.selectStudent(this.con, id);
         try {
             while(rs.next()){
-                System.out.println(rs.getString(1) + " " + rs.getString(2));
+                System.out.println(
+                        rs.getString("NOMBRE_ESTUDIANTE") + " " +
+                        rs.getString("APELLIDO_ESTUDIANTE") + " " + 
+                        rs.getString("TELEFONO")
+                );
             }
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
