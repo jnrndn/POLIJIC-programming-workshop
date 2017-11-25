@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class Student {
     
-    private int id;
+    private long id;
     private String nombre;
     private String apellido;
     private String programa;
@@ -43,7 +43,7 @@ public class Student {
      * @param telefono
      * @param correo 
      */
-    public Student(int id, String nombre, String apellido, String programa, int edad, int telefono, String correo) {
+    public Student(long id, String nombre, String apellido, String programa, int edad, int telefono, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -62,10 +62,11 @@ public class Student {
     
     /**
      * This method take id param to make a query to DB 
-     * and get a speceific student
-     * @param id 
+     * and get a speceific student, return a Resultset 
+     * with student information
+     * @param id
      */
-    public void getStudent(int id){
+    public void getStudent(long id){
         ResultSet rs = QueryService.selectStudent(this.con, id);
         try {
             while(rs.next()){
@@ -75,6 +76,7 @@ public class Student {
                         rs.getString("TELEFONO")
                 );
             }
+        
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }

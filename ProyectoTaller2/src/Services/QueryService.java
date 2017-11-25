@@ -22,13 +22,16 @@ public class QueryService {
      * @param id
      * @return ResultSet with one row
      */    
-    public static ResultSet selectStudent(Connection con, int id){
+    public static ResultSet selectStudent(Connection con, long id){
         ResultSet rs = null;
         try {
             Statement st;
             st = con.createStatement();
-            rs = st.executeQuery("SELECT NOMBRE_ESTUDIANTE, APELLIDO_ESTUDIANTE, PROGRAMA, EDAD, TELEFONO, "
-                    + "CORREO FROM PROYECTOTALLER.TABLA_ESTUDIANTE WHERE ID_ESTUDIANTE="+ id);
+            rs = st.executeQuery(
+                "SELECT NOMBRE_ESTUDIANTE, APELLIDO_ESTUDIANTE, PROGRAMA, EDAD, TELEFONO, CORREO "
+                + "FROM PROYECTOTALLER.TABLA_ESTUDIANTE "
+                + "WHERE ID_ESTUDIANTE="+ id
+            );
             
         } catch (SQLException e) {
             System.out.println("Error selectStudent: " + e);
@@ -36,4 +39,26 @@ public class QueryService {
         return rs;
     }
     
+    /**
+     * This method make a query to find a student with id param
+     * @param con
+     * @param id
+     * @return ResultSet with one row
+     */    
+    public static ResultSet selectTeacher(Connection con, long id){
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                "SELECT NOMBRE_PROFESOR, APELLIDO_PROFESOR, TELEFONO, CORREO, PROFESION "
+                + "FROM PROYECTOTALLER.TABLA_PROFESOR "
+                + "WHERE ID_PROFESOR="+ id
+            );
+            
+        } catch (SQLException e) {
+            System.out.println("Error selectTeacher: " + e);
+        }
+        return rs;
+    }
 }
