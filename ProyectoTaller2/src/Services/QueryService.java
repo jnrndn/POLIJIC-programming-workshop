@@ -104,19 +104,57 @@ public class QueryService {
     }
     
     
-    
      public static ResultSet selectStudentsPerSubtject(Connection con, int codigoA){
         ResultSet rs = null;
         try {
             Statement st;
             st = con.createStatement();
-            rs = st.executeQuery("select E.ID_ESTUDIANTE, E.NOMBRE_ESTUDIANTE, A.NOMBRE "
-                    + "from TABLA_ESTUDIANTE E "
-                    + "join TABLA_SEGUIMIENTO S on "
+            rs = st.executeQuery("SELECT E.ID_ESTUDIANTE, E.NOMBRE_ESTUDIANTE, A.NOMBRE "
+                    + "FROM TABLA_ESTUDIANTE E "
+                    + "JOIN TABLA_SEGUIMIENTO S ON "
                     + "E.ID_ESTUDIANTE = S.ID_ESTUDIANTE "
-                    + "join TABLA_ASIGNATURA A on "
+                    + "JOIN TABLA_ASIGNATURA A ON "
                     + "S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA "
-                    + "where A.CODIGO_ASIGNATURA= " +codigoA);
+                    + "WHERE A.CODIGO_ASIGNATURA= " +codigoA);
+        } catch (SQLException e) {
+            System.out.println("Error selectStudent: " + e);
+        }
+        return rs;
+    }
+     
+     
+     public static ResultSet selectTeachersPerSubtject(Connection con ){
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery("select NOMBRE_PROFESOR P, NOMBRE_ESTUDIANTE E, NOMBRE A " 
+                    + "from TABLA_PROFESOR P " 
+                    + "join TABLA_ASIGNATURA A on "
+                    + "P.ID_PROFESOR = A.ID_PROFESOR " 
+                    + "join TABLA_SEGUIMIENTO S on " 
+                    + "A.CODIGO_ASIGNATURA = S.CODIGO_ASIGNATURA " 
+                    + "join TABLA_ESTUDIANTE E on " 
+                    + "S.ID_ESTUDIANTE = E.ID_ESTUDIANTE;");
+        } catch (SQLException e) {
+            System.out.println("Error selectStudent: " + e);
+        }
+        return rs;
+    }
+     
+     
+     public static ResultSet selectAverageGrades(Connection con, int codigoA ){
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery("select AVG(S.PARCIAL_1) AS PROMP1, AVG(S.PARCIAL_2) AS PROMP2, AVG(N.NOTA) AS NOTAP "
+                    + "FROM TABLA_SEGUIMIENTO S "
+                    + "JOIN TABLA_NOTA N ON " 
+                    + "S.CODIGO_SEGUIMIENTO = N.CODIGO_SEGUIMIENTO " 
+                    + "JOIN TABLA_ASIGNATURA A ON " 
+                    + "S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA " 
+                    + "WHERE A.CODIGO_ASIGNATURA = 001;" + codigoA);
         } catch (SQLException e) {
             System.out.println("Error selectStudent: " + e);
         }
