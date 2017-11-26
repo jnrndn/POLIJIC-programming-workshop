@@ -36,4 +36,23 @@ public class QueryService {
         return rs;
     }
     
+    
+    
+     public static ResultSet selectStudentsPerSubtject(Connection con, int codigoA){
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery("select E.ID_ESTUDIANTE, E.NOMBRE_ESTUDIANTE, A.NOMBRE "
+                    + "from TABLA_ESTUDIANTE E "
+                    + "join TABLA_SEGUIMIENTO S on "
+                    + "E.ID_ESTUDIANTE = S.ID_ESTUDIANTE "
+                    + "join TABLA_ASIGNATURA A on "
+                    + "S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA "
+                    + "where A.CODIGO_ASIGNATURA= " +codigoA);
+        } catch (SQLException e) {
+            System.out.println("Error selectStudent: " + e);
+        }
+        return rs;
+    }
 }
