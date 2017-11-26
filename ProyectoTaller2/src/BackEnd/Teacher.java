@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -64,6 +65,37 @@ public class Teacher {
 
     public ResultSet fillComboSubjects(long id){
         return QueryService.selectSubjectsForTeacher(this.con, id);
+    }
+    
+    public void getStudentsPerSubtject(Object name, DefaultTableModel model){
+        int code = 0;
+        String subject_name = name.toString();
+        switch(subject_name){
+            case "Matematicas":
+                code = 001;
+                break;
+            case "Ciencias naturales":
+                code = 002;
+                break;
+            case "Humanidades":
+                code = 003;
+                break;
+            case "Etica":
+                code = 004;
+                break;
+        }
+        Object[] dataSet = new Object[3];
+        ResultSet rs =  QueryService.selectStudentsPerSubtject(this.con, code);
+        try {
+            while(rs.next()){
+                dataSet[0] = rs.getString("ID_ESTUDIANTE");
+                dataSet[1] = rs.getString("NOMBRE_ESTUDIANTE");
+                dataSet[2] = rs.getString("APELLIDO_ESTUDIANTE");
+            }
+            model.addRow(dataSet);
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public long getId() {

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +25,7 @@ public class TeacherView extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.tblListbySubject.setVisible(false);
         ResultSet rs = this.teacher.fillComboSubjects(this.teacher.getId());
         this.lblTeacheName.setText(this.teacher.getNombre());
         try {
@@ -51,6 +54,8 @@ public class TeacherView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cmbSubjects = new javax.swing.JComboBox<>();
         btnStudentList = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblListbySubject = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,7 +73,30 @@ public class TeacherView extends javax.swing.JFrame {
             }
         });
 
-        btnStudentList.setText("Ver lista");
+        btnStudentList.setText("Ver lista de estudiantes");
+        btnStudentList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudentListActionPerformed(evt);
+            }
+        });
+
+        tblListbySubject.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Estudiante", "Nombre", "Title 3"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblListbySubject);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,26 +111,31 @@ public class TeacherView extends javax.swing.JFrame {
                         .addComponent(lblTeacheName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(224, 224, 224)
-                        .addComponent(btnStudentList)))
-                .addContainerGap(302, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(224, 224, 224)
+                                .addComponent(btnStudentList)))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblTeacheName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTeacheName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnStudentList))
-                .addContainerGap(456, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,6 +144,16 @@ public class TeacherView extends javax.swing.JFrame {
     private void cmbSubjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSubjectsActionPerformed
         
     }//GEN-LAST:event_cmbSubjectsActionPerformed
+
+    private void btnStudentListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentListActionPerformed
+        if(this.cmbSubjects.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una asignatura de la lista");
+        }else {
+             DefaultTableModel model = (DefaultTableModel) this.tblListbySubject.getModel();
+            this.teacher.getStudentsPerSubtject(this.cmbSubjects.getSelectedItem(), model);
+            this.tblListbySubject.setVisible(true);
+        }
+    }//GEN-LAST:event_btnStudentListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,6 +195,8 @@ public class TeacherView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbSubjects;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTeacheName;
+    private javax.swing.JTable tblListbySubject;
     // End of variables declaration//GEN-END:variables
 }
