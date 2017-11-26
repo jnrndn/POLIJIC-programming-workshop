@@ -1,6 +1,5 @@
 package proyectotaller2;
 
-import BackEnd.Student;
 import FrontEnd.StartView;
 
 public class ProyectoTaller2 {

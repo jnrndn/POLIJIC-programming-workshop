@@ -66,20 +66,23 @@ public class Student {
      * with student information
      * @param id
      */
-    public void getStudent(long id){
+    public boolean isStudent(long id){
         ResultSet rs = QueryService.selectStudent(this.con, id);
+        boolean isStudent =false;
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 System.out.println(
-                        rs.getString("NOMBRE_ESTUDIANTE") + " " +
-                        rs.getString("APELLIDO_ESTUDIANTE") + " " + 
-                        rs.getString("TELEFONO")
+                        rs.getString("NOMBRE_ESTUDIANTE") + " "
+                        + rs.getString("APELLIDO_ESTUDIANTE") + " "
+                        + rs.getString("TELEFONO")
                 );
+            isStudent = true;
             }
-        
+
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return isStudent;
     }
     
     

@@ -61,4 +61,28 @@ public class QueryService {
         }
         return rs;
     }
+    
+    /**
+     * this method make a query to get all subjects in DB
+     * @param con
+     * @param id
+     * @return subjects stored in DB
+     */
+    
+    public static ResultSet selectSubjectsForTeacher(Connection con, long id ){
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                "SELECT CODIGO_ASIGNATURA, NOMBRE "
+                + "FROM PROYECTOTALLER.TABLA_ASIGNATURA "
+                + "WHERE ID_PROFESOR ="+ id
+            );
+            
+        } catch (SQLException e) {
+            System.out.println("Error selectSubjects: " + e);
+        }
+        return rs;
+    }
 }

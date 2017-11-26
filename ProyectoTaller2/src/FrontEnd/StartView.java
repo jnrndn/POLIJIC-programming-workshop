@@ -28,6 +28,7 @@ public class StartView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.txtId.requestFocus();
         v.Numeros(this.txtId);
+        //this.txtId.setTransferHandler(null);
     }
 
     /**
@@ -106,9 +107,17 @@ public class StartView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
-        boolean isStudent = false, isTeacher = true;
-        this.student.getStudent(Long.parseLong(this.txtId.getText()));
-        this.teacher.getTeacher(Long.parseLong(this.txtId.getText()));
+        boolean isStudent = this.student.isStudent(Long.parseLong(this.txtId.getText()));
+        boolean isTeacher = this.teacher.isTeacher(Long.parseLong(this.txtId.getText()));
+        if (isStudent){
+            StudentView sv = new StudentView();
+            sv.setVisible(true);
+        }
+        if (isTeacher) {
+            TeacherView tv = new TeacherView(this.teacher);
+            tv.setVisible(true);
+        }
+        this.dispose();
     }//GEN-LAST:event_btnLogInActionPerformed
 
     /**
