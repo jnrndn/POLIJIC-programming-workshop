@@ -110,7 +110,7 @@ public class StartView extends javax.swing.JFrame {
         boolean isStudent = this.student.isStudent(Long.parseLong(this.txtId.getText()));
         boolean isTeacher = this.teacher.isTeacher(Long.parseLong(this.txtId.getText()));
         if (isStudent){
-            StudentView sv = new StudentView();
+            StudentView sv = new StudentView(this.student);
             sv.setVisible(true);
         }
         if (isTeacher) {

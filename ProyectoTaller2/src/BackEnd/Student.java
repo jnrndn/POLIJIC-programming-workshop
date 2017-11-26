@@ -71,18 +71,73 @@ public class Student {
         boolean isStudent =false;
         try {
             while (rs.next()) {
-                System.out.println(
-                        rs.getString("NOMBRE_ESTUDIANTE") + " "
-                        + rs.getString("APELLIDO_ESTUDIANTE") + " "
-                        + rs.getString("TELEFONO")
-                );
-            isStudent = true;
+                this.id = id;
+                this.setNombre(rs.getString("NOMBRE_ESTUDIANTE"));
+                this.setApellido(rs.getString("APELLIDO_ESTUDIANTE"));
+                this.setTelefono( Integer.parseInt(rs.getString("TELEFONO")));
+                isStudent = true;
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isStudent;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(String programa) {
+        this.programa = programa;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
     
     

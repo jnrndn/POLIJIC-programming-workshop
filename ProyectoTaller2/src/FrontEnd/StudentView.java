@@ -5,18 +5,31 @@
  */
 package FrontEnd;
 
+import BackEnd.Student;
+
 /**
  *
  * @author jnjre
  */
 public class StudentView extends javax.swing.JFrame {
 
+    Student student = null;
+    
     /**
      * Creates new form StudentView
+     * @param student
      */
-    public StudentView() {
+    public StudentView(Student student) {
+        this.student = student;
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.lblStudentFullName.setText(
+                this.student.getNombre() + " " +  this.student.getApellido()
+        );
     }
+
+    private StudentView() {}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,17 +40,27 @@ public class StudentView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblStudentFullName = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblStudentFullName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,5 +102,6 @@ public class StudentView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblStudentFullName;
     // End of variables declaration//GEN-END:variables
 }
