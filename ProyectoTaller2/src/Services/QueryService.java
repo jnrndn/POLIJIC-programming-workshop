@@ -87,7 +87,7 @@ public class QueryService {
         return rs;
     }
 
-    public static ResultSet selectCalificaiones(Connection con) {
+    public static ResultSet selectGrades(Connection con) {
         ResultSet rs = null;
         try {
             Statement st;

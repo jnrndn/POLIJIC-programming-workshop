@@ -139,8 +139,8 @@ public class Student {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    public void getCalificaciones(){
-        ResultSet rs = QueryService.selectCalificaiones(this.con);
+    public void getGrades(){
+        ResultSet rs = QueryService.selectGrades(this.con);
         
         try{
             while(rs.next()){
