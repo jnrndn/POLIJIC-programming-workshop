@@ -139,6 +139,23 @@ public class Student {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+    public void getCalificaciones(){
+        ResultSet rs = QueryService.selectCalificaiones(this.con);
+        
+        try{
+            while(rs.next()){
+                
+                System.out.println(
+                        rs.getString("ID_ESTUDIANTE")+" "+
+                        rs.getString("NOMBRE_ESTUDIANTE")+" "+
+                        rs.getString("PARCIAL_1")+" "+
+                        rs.getString("PARCIAL_2")
+                );      
+            }
+        }catch (SQLException ex){
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE,null, ex);
+        }
+    }
     
     
 }

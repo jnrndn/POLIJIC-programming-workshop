@@ -24,7 +24,7 @@ public class ConnectionService {
         Connection con = null;
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            con  = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "123456");
+            con  = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "System", "1234");
             System.out.println(con);
             if (con != null){
                 System.out.println("Conexión establecida.");
