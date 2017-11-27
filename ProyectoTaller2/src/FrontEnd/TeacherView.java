@@ -85,7 +85,7 @@ public class TeacherView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Estudiante", "Nombre", "Title 3"
+                "ID Estudiante", "Nombre", "Apellido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -133,9 +133,9 @@ public class TeacherView extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnStudentList))
-                .addGap(53, 53, 53)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         pack();

@@ -91,8 +91,8 @@ public class Teacher {
                 dataSet[0] = rs.getString("ID_ESTUDIANTE");
                 dataSet[1] = rs.getString("NOMBRE_ESTUDIANTE");
                 dataSet[2] = rs.getString("APELLIDO_ESTUDIANTE");
+                model.addRow(dataSet);
             }
-            model.addRow(dataSet);
         } catch (SQLException ex) {
             Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
         }
