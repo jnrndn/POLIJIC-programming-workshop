@@ -63,6 +63,7 @@ public class Teacher {
         return isTeacher;
     }
 
+    
     public ResultSet fillComboSubjects(long id){
         return QueryService.selectSubjectsForTeacher(this.con, id);
     }
