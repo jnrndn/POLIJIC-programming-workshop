@@ -86,7 +86,7 @@ public class Teacher {
                 break;
         }
         Object[] dataSet = new Object[3];
-        ResultSet rs =  QueryService.selectStudentsPerSubtject(this.con, code);
+        ResultSet rs =  QueryService.selectStudentsPerSubject(this.con, code);
         try {
             while(rs.next()){
                 dataSet[0] = rs.getString("ID_ESTUDIANTE");
@@ -97,6 +97,37 @@ public class Teacher {
         } catch (SQLException ex) {
             Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public float[] getAverageGrades(Object name){
+        int code = 0;
+        String subject_name = name.toString();
+        switch(subject_name){
+            case "Matematicas":
+                code = 001;
+                break;
+            case "Ciencias naturales":
+                code = 002;
+                break;
+            case "Humanidades":
+                code = 003;
+                break;
+            case "Etica":
+                code = 004;
+                break;
+        }
+        ResultSet rs = QueryService.selectAverageGrades(this.con, code);
+        float[] avgs = new float[3];
+        try {
+            while(rs.next()){
+                avgs[0] = Float.parseFloat(rs.getString(1));
+                avgs[1] = Float.parseFloat(rs.getString(2));
+                avgs[2] = Float.parseFloat(rs.getString(3));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return avgs;
     }
     
     public long getId() {

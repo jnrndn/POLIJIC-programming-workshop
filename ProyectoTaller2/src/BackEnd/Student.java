@@ -65,6 +65,7 @@ public class Student {
      * and get a speceific student, return a Resultset 
      * with student information
      * @param id
+     * @return true if result set is not empty
      */
     public boolean isStudent(long id){
         ResultSet rs = QueryService.selectStudent(this.con, id);
@@ -140,7 +141,7 @@ public class Student {
         this.correo = correo;
     }
     public void getGrades(){
-        ResultSet rs = QueryService.selectGrades(this.con);
+        ResultSet rs = QueryService.selectGradesBySubject(this.con);
         
         try{
             while(rs.next()){

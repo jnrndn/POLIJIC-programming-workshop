@@ -87,7 +87,7 @@ public class QueryService {
         return rs;
     }
 
-    public static ResultSet selectGrades(Connection con) {
+    public static ResultSet selectGradesBySubject(Connection con) {
         ResultSet rs = null;
         try {
             Statement st;
@@ -105,7 +105,7 @@ public class QueryService {
     
     
     
-     public static ResultSet selectStudentsPerSubtject(Connection con, int codigo){
+     public static ResultSet selectStudentsPerSubject(Connection con, int codigo){
         ResultSet rs = null;
         try {
             Statement st;
