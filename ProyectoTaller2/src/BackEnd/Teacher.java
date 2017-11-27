@@ -63,8 +63,6 @@ public class Teacher {
     }
 
     
-    //metodos de las consultas VERO
-    
     public ResultSet fillComboSubjects(long id){
         return QueryService.selectSubjectsForTeacher(this.con, id);
     }

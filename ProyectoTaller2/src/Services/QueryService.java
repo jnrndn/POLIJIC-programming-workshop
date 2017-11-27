@@ -110,10 +110,10 @@ public class QueryService {
             Statement st;
             st = con.createStatement();
             rs = st.executeQuery("SELECT E.ID_ESTUDIANTE, E.NOMBRE_ESTUDIANTE, A.NOMBRE "
-                    + "FROM TABLA_ESTUDIANTE E "
-                    + "JOIN TABLA_SEGUIMIENTO S ON "
+                    + "FROM  PROYECTOTALLER.TABLA_ESTUDIANTE E "
+                    + "JOIN  PROYECTOTALLER.TABLA_SEGUIMIENTO S ON "
                     + "E.ID_ESTUDIANTE = S.ID_ESTUDIANTE "
-                    + "JOIN TABLA_ASIGNATURA A ON "
+                    + "JOIN  PROYECTOTALLER.TABLA_ASIGNATURA A ON "
                     + "S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA "
                     + "WHERE A.CODIGO_ASIGNATURA= " +codigoA);
         } catch (SQLException e) {
@@ -129,12 +129,12 @@ public class QueryService {
             Statement st;
             st = con.createStatement();
             rs = st.executeQuery("select NOMBRE_PROFESOR P, NOMBRE_ESTUDIANTE E, NOMBRE A " 
-                    + "from TABLA_PROFESOR P " 
-                    + "join TABLA_ASIGNATURA A on "
+                    + "from  PROYECTOTALLER.TABLA_PROFESOR P " 
+                    + "join  PROYECTOTALLER.TABLA_ASIGNATURA A on "
                     + "P.ID_PROFESOR = A.ID_PROFESOR " 
-                    + "join TABLA_SEGUIMIENTO S on " 
+                    + "join  PROYECTOTALLER.TABLA_SEGUIMIENTO S on " 
                     + "A.CODIGO_ASIGNATURA = S.CODIGO_ASIGNATURA " 
-                    + "join TABLA_ESTUDIANTE E on " 
+                    + "join  PROYECTOTALLER.TABLA_ESTUDIANTE E on " 
                     + "S.ID_ESTUDIANTE = E.ID_ESTUDIANTE;");
         } catch (SQLException e) {
             System.out.println("Error selectStudent: " + e);
@@ -149,10 +149,10 @@ public class QueryService {
             Statement st;
             st = con.createStatement();
             rs = st.executeQuery("select AVG(S.PARCIAL_1) AS PROMP1, AVG(S.PARCIAL_2) AS PROMP2, AVG(N.NOTA) AS NOTAP "
-                    + "FROM TABLA_SEGUIMIENTO S "
-                    + "JOIN TABLA_NOTA N ON " 
+                    + "FROM  PROYECTOTALLER.TABLA_SEGUIMIENTO S "
+                    + "JOIN  PROYECTOTALLER.TABLA_NOTA N ON " 
                     + "S.CODIGO_SEGUIMIENTO = N.CODIGO_SEGUIMIENTO " 
-                    + "JOIN TABLA_ASIGNATURA A ON " 
+                    + "JOIN  PROYECTOTALLER.TABLA_ASIGNATURA A ON " 
                     + "S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA " 
                     + "WHERE A.CODIGO_ASIGNATURA = 001;" + codigoA);
         } catch (SQLException e) {
