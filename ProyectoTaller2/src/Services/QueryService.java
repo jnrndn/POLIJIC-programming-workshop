@@ -128,13 +128,13 @@ public class QueryService {
         try {
             Statement st;
             st = con.createStatement();
-            rs = st.executeQuery("select NOMBRE_PROFESOR P, NOMBRE_ESTUDIANTE E, NOMBRE A " 
-                    + "from  PROYECTOTALLER.TABLA_PROFESOR P " 
-                    + "join  PROYECTOTALLER.TABLA_ASIGNATURA A on "
+            rs = st.executeQuery("SELECT NOMBRE_PROFESOR P, NOMBRE_ESTUDIANTE E, NOMBRE A " 
+                    + "FROM  PROYECTOTALLER.TABLA_PROFESOR P " 
+                    + "JOIN  PROYECTOTALLER.TABLA_ASIGNATURA A ON "
                     + "P.ID_PROFESOR = A.ID_PROFESOR " 
-                    + "join  PROYECTOTALLER.TABLA_SEGUIMIENTO S on " 
+                    + "JOIN  PROYECTOTALLER.TABLA_SEGUIMIENTO S ON " 
                     + "A.CODIGO_ASIGNATURA = S.CODIGO_ASIGNATURA " 
-                    + "join  PROYECTOTALLER.TABLA_ESTUDIANTE E on " 
+                    + "JOIN  PROYECTOTALLER.TABLA_ESTUDIANTE E ON " 
                     + "S.ID_ESTUDIANTE = E.ID_ESTUDIANTE;");
         } catch (SQLException e) {
             System.out.println("Error selectStudent: " + e);
@@ -148,13 +148,13 @@ public class QueryService {
         try {
             Statement st;
             st = con.createStatement();
-            rs = st.executeQuery("select AVG(S.PARCIAL_1) AS PROMP1, AVG(S.PARCIAL_2) AS PROMP2, AVG(N.NOTA) AS NOTAP "
+            rs = st.executeQuery("SELECT AVG(S.PARCIAL_1) AS PROMP1, AVG(S.PARCIAL_2) AS PROMP2, AVG(N.NOTA) AS NOTAP "
                     + "FROM  PROYECTOTALLER.TABLA_SEGUIMIENTO S "
                     + "JOIN  PROYECTOTALLER.TABLA_NOTA N ON " 
                     + "S.CODIGO_SEGUIMIENTO = N.CODIGO_SEGUIMIENTO " 
                     + "JOIN  PROYECTOTALLER.TABLA_ASIGNATURA A ON " 
                     + "S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA " 
-                    + "WHERE A.CODIGO_ASIGNATURA = 001;" + codigoA);
+                    + "WHERE A.CODIGO_ASIGNATURA = " + codigoA);
         } catch (SQLException e) {
             System.out.println("Error selectStudent: " + e);
         }
