@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TeacherView extends javax.swing.JFrame {
     Teacher teacher = null;
-    
+    Listings Listings = new Listings();
     /**
      * Creates new form TeacherView
      * @param teacher
