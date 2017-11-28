@@ -82,42 +82,43 @@ public class QueryService {
             );
             
         } catch (SQLException e) {
-            System.out.println("Error selectSubjects: " + e);
+            System.out.println("Error selectSubjectsForTeacher: " + e);
         }
         return rs;
     }
 
-    public static ResultSet selectCalificaiones(Connection con) {
+    public static ResultSet selectGradesBySubject(Connection con) {
         ResultSet rs = null;
         try {
             Statement st;
             st = con.createStatement();
-            rs = st.executeQuery("SELECT TABLA_ESTUDIANTE.ID_ESTUDIANTE,NOMBRE_ESTUDIANTE,PARCIAL_1,PARCIAL_2 "
-                    + "FROM PROYECTOTALLER.TABLA_ESTUDIANTE   INNER JOIN PROYECTOTALLER.TABLA_SEGUIMIENTO "
-                    + "ON TABLA_ESTUDIANTE.ID_ESTUDIANTE=TABLA_SEGUIMIENTO.ID_ESTUDIANTE "
-                    + "GROUP BY TABLA_ESTUDIANTE.ID_ESTUDIANTE,NOMBRE_ESTUDIANTE,PARCIAL_1,PARCIAL_2");
+            rs = st.executeQuery("SELECT TABLA_ESTUDIANTE.ID_ESTUDIANTE, NOMBRE_ESTUDIANTE, PARCIAL_1, PARCIAL_2 "
+                    + "FROM PROYECTOTALLER.TABLA_ESTUDIANTE INNER JOIN PROYECTOTALLER.TABLA_SEGUIMIENTO "
+                    + "ON TABLA_ESTUDIANTE.ID_ESTUDIANTE = TABLA_SEGUIMIENTO.ID_ESTUDIANTE "
+                    + "GROUP BY TABLA_ESTUDIANTE.ID_ESTUDIANTE, NOMBRE_ESTUDIANTE, PARCIAL_1, PARCIAL_2");
 
         } catch (SQLException e) {
-            System.out.println("Error selectStudent: " + e);
+            System.out.println("Error selectGrades: " + e);
         }
         return rs;
     }
     
     
-     public static ResultSet selectStudentsPerSubtject(Connection con, int codigoA){
+    
+     public static ResultSet selectStudentsPerSubject(Connection con, int codigo){
         ResultSet rs = null;
         try {
             Statement st;
             st = con.createStatement();
-            rs = st.executeQuery("SELECT E.ID_ESTUDIANTE, E.NOMBRE_ESTUDIANTE, A.NOMBRE "
-                    + "FROM  PROYECTOTALLER.TABLA_ESTUDIANTE E "
-                    + "JOIN  PROYECTOTALLER.TABLA_SEGUIMIENTO S ON "
+            rs = st.executeQuery("SELECT E.ID_ESTUDIANTE, E.NOMBRE_ESTUDIANTE, E.APELLIDO_ESTUDIANTE, A.NOMBRE "
+                    + "FROM PROYECTOTALLER.TABLA_ESTUDIANTE E "
+                    + "JOIN PROYECTOTALLER.TABLA_SEGUIMIENTO S ON "
                     + "E.ID_ESTUDIANTE = S.ID_ESTUDIANTE "
-                    + "JOIN  PROYECTOTALLER.TABLA_ASIGNATURA A ON "
+                    + "JOIN PROYECTOTALLER.TABLA_ASIGNATURA A ON "
                     + "S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA "
-                    + "WHERE A.CODIGO_ASIGNATURA= " +codigoA);
+                    + "WHERE A.CODIGO_ASIGNATURA = " +codigo);
         } catch (SQLException e) {
-            System.out.println("Error selectStudent: " + e);
+            System.out.println("Error selectStudentsPerSubtject: " + e);
         }
         return rs;
     }
