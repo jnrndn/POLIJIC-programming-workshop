@@ -16,6 +16,8 @@ public class Listings extends javax.swing.JFrame {
      */
     public Listings() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
