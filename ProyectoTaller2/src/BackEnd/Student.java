@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class Student {
     
-    private int id;
+    private long id;
     private String nombre;
     private String apellido;
     private String programa;
@@ -43,7 +43,7 @@ public class Student {
      * @param telefono
      * @param correo 
      */
-    public Student(int id, String nombre, String apellido, String programa, int edad, int telefono, String correo) {
+    public Student(long id, String nombre, String apellido, String programa, int edad, int telefono, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -62,26 +62,86 @@ public class Student {
     
     /**
      * This method take id param to make a query to DB 
-     * and get a speceific student
-     * @param id 
+     * and get a speceific student, return a Resultset 
+     * with student information
+     * @param id
+     * @return true if result set is not empty
      */
-    public void getStudent(int id) {
+    public boolean isStudent(long id){
         ResultSet rs = QueryService.selectStudent(this.con, id);
-        
+        boolean isStudent =false;
         try {
-            while(rs.next()){
-                System.out.println(
-                        rs.getString("NOMBRE_ESTUDIANTE") + " " +
-                        rs.getString("APELLIDO_ESTUDIANTE") + " " + 
-                        rs.getString("TELEFONO")
-                );
+            while (rs.next()) {
+                this.id = id;
+                this.setNombre(rs.getString("NOMBRE_ESTUDIANTE"));
+                this.setApellido(rs.getString("APELLIDO_ESTUDIANTE"));
+                this.setTelefono( Integer.parseInt(rs.getString("TELEFONO")));
+                isStudent = true;
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return isStudent;
     }
-    public void getCalificaciones(){
-        ResultSet rs = QueryService.selectCalificaiones(this.con);
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(String programa) {
+        this.programa = programa;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+    public void getGrades(){
+        ResultSet rs = QueryService.selectGradesBySubject(this.con);
         
         try{
             while(rs.next()){
