@@ -242,7 +242,7 @@ public class TeacherView extends javax.swing.JFrame {
 
     private void btbLookGeneralInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLookGeneralInfoActionPerformed
        this.dispose();
-       Listings list = new Listings();
+       Report list = new Report();
        list.setVisible(true);
     }//GEN-LAST:event_btbLookGeneralInfoActionPerformed
 
