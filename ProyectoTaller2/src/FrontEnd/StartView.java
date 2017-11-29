@@ -116,6 +116,9 @@ public class StartView extends javax.swing.JFrame {
         if (isTeacher) {
             TeacherView tv = new TeacherView(this.teacher);
             tv.setVisible(true);
+        } 
+        if(!isTeacher && !isStudent){
+            JOptionPane.showMessageDialog(null, "No se encontro el usuario");
         }
         this.dispose();
     }//GEN-LAST:event_btnLogInActionPerformed

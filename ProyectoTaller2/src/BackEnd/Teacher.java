@@ -120,9 +120,9 @@ public class Teacher {
         float[] avgs = new float[3];
         try {
             while(rs.next()){
-                avgs[0] = Float.parseFloat(rs.getString(1));
-                avgs[1] = Float.parseFloat(rs.getString(2));
-                avgs[2] = Float.parseFloat(rs.getString(3));
+                avgs[0] = Float.parseFloat(rs.getString("PROMP1"));
+                avgs[1] = Float.parseFloat(rs.getString("PROMP2"));
+                avgs[2] = Float.parseFloat(rs.getString("NOTAP"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
