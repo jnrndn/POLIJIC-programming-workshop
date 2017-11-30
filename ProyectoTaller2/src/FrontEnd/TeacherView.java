@@ -263,17 +263,18 @@ public class TeacherView extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         String boton [] = {"Aceptar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea cerrar sesión?", "Titulo",
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea cerrar sesión?", "Cerrar sesión",
                 0, 0, null, boton, this);
         if (eleccion == JOptionPane.YES_OPTION){
             this.dispose();
             StartView startview = new StartView();
+            startview.setVisible(true);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         String boton [] = {"Aceptar", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Titulo",
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Salir",
                 0, 0, null, boton, this);
         if (eleccion == JOptionPane.YES_OPTION){
             System.exit(0);

@@ -86,6 +86,24 @@ public class QueryService {
         }
         return rs;
     }
+    
+    public static ResultSet selectSubjectsForStudent(Connection con, long id){
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                "SELECT A.NOMBRE " +
+                "FROM PROYECTOTALLER.TABLA_ASIGNATURA A INNER JOIN PROYECTOTALLER.TABLA_SEGUIMIENTO S " +
+                "ON S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA " +
+                "WHERE S.ID_ESTUDIANTE = " + id
+            );
+            
+        } catch (SQLException e) {
+            System.out.println("Error selectSubjectsForTeacher: " + e);
+        }
+        return rs;
+    }
 
     public static ResultSet selectGradesBySubject(Connection con) {
         ResultSet rs = null;

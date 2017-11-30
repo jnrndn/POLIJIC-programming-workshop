@@ -6,6 +6,10 @@
 package FrontEnd;
 
 import BackEnd.Student;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +32,14 @@ public class StudentView extends javax.swing.JFrame {
         this.lblStudentFullName.setText(
                 this.student.getNombre() + " " +  this.student.getApellido()
         );
+        ResultSet rs = student.fillComboStudentSubjects(this.student.getId());
+        try {
+            while(rs.next()){
+                this.cmbSubjects.addItem(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private StudentView() {}
@@ -43,6 +55,8 @@ public class StudentView extends javax.swing.JFrame {
 
         lblStudentFullName = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        cmbSubjects = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -60,25 +74,39 @@ public class StudentView extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Asignaturas matriculadas:");
+
+        cmbSubjects.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione una materia" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(506, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addGap(31, 31, 31))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(43, 43, 43)
+                        .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 267, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addGap(31, 31, 31))
         );
@@ -88,17 +116,18 @@ public class StudentView extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         String boton [] = {"Aceptar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea cerrar sesión?", "Titulo",
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea cerrar sesión?", "Cerrar sesión",
                 0, 0, null, boton, this);
         if (eleccion == JOptionPane.YES_OPTION){
             this.dispose();
             StartView startview = new StartView();
+            startview.setVisible(true);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         String boton [] = {"Aceptar", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Titulo",
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Salir",
                 0, 0, null, boton, this);
         if (eleccion == JOptionPane.YES_OPTION){
             System.exit(0);
@@ -144,6 +173,8 @@ public class StudentView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cmbSubjects;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblStudentFullName;
     // End of variables declaration//GEN-END:variables
 }

@@ -69,22 +69,7 @@ public class Teacher {
     }
     
     public void getStudentsPerSubtject(Object name, DefaultTableModel model){
-        int code = 0;
-        String subject_name = name.toString();
-        switch(subject_name){
-            case "Matematicas":
-                code = 001;
-                break;
-            case "Ciencias naturales":
-                code = 002;
-                break;
-            case "Humanidades":
-                code = 003;
-                break;
-            case "Etica":
-                code = 004;
-                break;
-        }
+        int code = this.getSubjectCode(name.toString());
         Object[] dataSet = new Object[3];
         ResultSet rs =  QueryService.selectStudentsPerSubject(this.con, code);
         try {
@@ -100,8 +85,24 @@ public class Teacher {
     }
     
     public float[] getAverageGrades(Object name){
+        int code = this.getSubjectCode(name.toString());
+        
+        ResultSet rs = QueryService.selectAverageGrades(this.con, code);
+        float[] avgs = new float[3];
+        try {
+            while(rs.next()){
+                avgs[0] = Float.parseFloat(rs.getString("PROMP1"));
+                avgs[1] = Float.parseFloat(rs.getString("PROMP2"));
+                avgs[2] = Float.parseFloat(rs.getString("NOTAP"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return avgs;
+    }
+    
+    private int getSubjectCode(String subject_name){
         int code = 0;
-        String subject_name = name.toString();
         switch(subject_name){
             case "Matematicas":
                 code = 001;
@@ -116,18 +117,7 @@ public class Teacher {
                 code = 004;
                 break;
         }
-        ResultSet rs = QueryService.selectAverageGrades(this.con, code);
-        float[] avgs = new float[3];
-        try {
-            while(rs.next()){
-                avgs[0] = Float.parseFloat(rs.getString("PROMP1"));
-                avgs[1] = Float.parseFloat(rs.getString("PROMP2"));
-                avgs[2] = Float.parseFloat(rs.getString("NOTAP"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return avgs;
+        return code;
     }
     
     public long getId() {

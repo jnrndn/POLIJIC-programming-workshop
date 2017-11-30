@@ -84,6 +84,10 @@ public class Student {
         }
         return isStudent;
     }
+    
+    public ResultSet fillComboStudentSubjects(long id){
+        return QueryService.selectSubjectsForStudent(this.con, id);
+    }
 
     public long getId() {
         return id;
