@@ -6,6 +6,7 @@
 package FrontEnd;
 
 import BackEnd.Student;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,10 +42,23 @@ public class StudentView extends javax.swing.JFrame {
     private void initComponents() {
 
         lblStudentFullName = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         lblStudentFullName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,17 +68,44 @@ public class StudentView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        String boton [] = {"Aceptar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea cerrar sesión?", "Titulo",
+                0, 0, null, boton, this);
+        if (eleccion == JOptionPane.YES_OPTION){
+            this.dispose();
+            StartView startview = new StartView();
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        String boton [] = {"Aceptar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Titulo",
+                0, 0, null, boton, this);
+        if (eleccion == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }else if(eleccion == JOptionPane.NO_OPTION){
+            System.out.println("No se ha cerrado la aplicación");
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -102,6 +143,7 @@ public class StudentView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel lblStudentFullName;
     // End of variables declaration//GEN-END:variables
 }
