@@ -1,9 +1,11 @@
 package util;
 //IMPORTACIONES
+import FrontEnd.StartView;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class validaciones{
@@ -51,4 +53,17 @@ public class validaciones{
         catch(NumberFormatException e){
            return false;}
     }
+    
+//    public boolean Salir(){
+//        String boton [] = {"Aceptar"};
+//        int eleccion = JOptionPane.showOptionDialog(this,  "¿Seguro que desea cerrar sesión?", "Titulo",
+//                0, 0, null, boton, this);
+//        if (eleccion == JOptionPane.YES_OPTION){
+//            //this.dispose();
+//            StartView startview = new StartView();
+//        }
+//    }
+    
 }
+    
+
