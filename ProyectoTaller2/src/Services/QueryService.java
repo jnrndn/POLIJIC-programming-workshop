@@ -161,7 +161,6 @@ public class QueryService {
         return rs;
     }
      
-     
      public static ResultSet selectAverageGrades(Connection con, int codigoA ){
         ResultSet rs = null;
         try {
@@ -179,4 +178,36 @@ public class QueryService {
         }
         return rs;
     }
+     
+    public static ResultSet selectExams(Connection con, long id, int cod) {
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                    "SELECT CODIGO_SEGUIMIENTO, PARCIAL_1, PARCIAL_2 "
+                    + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
+                    + "WHERE ID_ESTUDIANTE = " + id + " AND CODIGO_ASIGNATURA = " + cod
+            );
+        } catch (SQLException e) {
+        }
+        return rs;
+    }
+    
+    public static ResultSet selectGrades(Connection con, int cod) {
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                    "SELECT CODIGO_NOTA, NOMBRE, NOTA "
+                    + "FROM PROYECTOTALLER.TABLA_NOTA "
+                    + "WHERE CODIGO_SEGUIMIENTO = " + cod
+            );
+        } catch (SQLException e) {
+        }
+        return rs;
+    }
+     
+    
 }

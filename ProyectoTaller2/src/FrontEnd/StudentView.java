@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,6 +31,9 @@ public class StudentView extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.lblCancel.setVisible(false);
+        this.btnCancel.setVisible(false);
+        this.tblGrades.setVisible(false);
         this.lblStudentFullName.setText(
                 this.student.getNombre() + " " +  this.student.getApellido()
         );
@@ -43,6 +48,11 @@ public class StudentView extends javax.swing.JFrame {
     }
 
     private StudentView() {}
+    
+    private void Limpiar(JTable tabla){
+        while(tabla.getRowCount() > 0){
+            ((DefaultTableModel)tabla.getModel()).removeRow(0);}
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,9 +64,18 @@ public class StudentView extends javax.swing.JFrame {
     private void initComponents() {
 
         lblStudentFullName = new javax.swing.JLabel();
-        btnSalir = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cmbSubjects = new javax.swing.JComboBox<>();
+        btnGetGrades = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblGrades = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        lblProm = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblState = new javax.swing.JLabel();
+        lblCancel = new javax.swing.JLabel();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -67,10 +86,10 @@ public class StudentView extends javax.swing.JFrame {
 
         lblStudentFullName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        btnSalir.setText("SALIR");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setText("SALIR");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
@@ -79,23 +98,88 @@ public class StudentView extends javax.swing.JFrame {
 
         cmbSubjects.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione una materia" }));
 
+        btnGetGrades.setText("Ver notas");
+        btnGetGrades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetGradesActionPerformed(evt);
+            }
+        });
+
+        tblGrades.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "Parcial 1", "Parcial 2"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblGrades);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Promedio:");
+
+        lblProm.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Estado:");
+
+        lblCancel.setText("Desea cancelar la materia?");
+
+        btnCancel.setText("Cancelar materia");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(506, Short.MAX_VALUE)
-                .addComponent(btnSalir)
-                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(43, 43, 43)
-                        .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblStudentFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                        .addComponent(btnGetGrades)
+                        .addGap(43, 43, 43))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addGap(43, 43, 43))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCancel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExit)
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblProm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblState, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,16 +189,30 @@ public class StudentView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 267, Short.MAX_VALUE)
-                .addComponent(btnSalir)
+                    .addComponent(cmbSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGetGrades))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblProm, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lblState, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExit)
+                    .addComponent(lblCancel)
+                    .addComponent(btnCancel))
                 .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         String boton [] = {"Aceptar"};
         int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea cerrar sesión?", "Cerrar sesión",
                 0, 0, null, boton, this);
@@ -123,7 +221,7 @@ public class StudentView extends javax.swing.JFrame {
             StartView startview = new StartView();
             startview.setVisible(true);
         }
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         String boton [] = {"Aceptar", "Cancelar"};
@@ -135,6 +233,24 @@ public class StudentView extends javax.swing.JFrame {
             System.out.println("No se ha cerrado la aplicación");
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnGetGradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetGradesActionPerformed
+        this.Limpiar(this.tblGrades);
+        if (this.cmbSubjects.getSelectedIndex() != 0) {
+            this.Limpiar(this.tblGrades);
+            DefaultTableModel model = (DefaultTableModel) this.tblGrades.getModel();
+            this.student.getExams(this.cmbSubjects.getSelectedItem(), model);
+            this.student.getGrades(this.cmbSubjects.getSelectedItem(), model);
+            this.tblGrades.setVisible(true);
+
+        }else {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una asignatura de la lista");
+        }
+    }//GEN-LAST:event_btnGetGradesActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,9 +288,18 @@ public class StudentView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnGetGrades;
     private javax.swing.JComboBox<String> cmbSubjects;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCancel;
+    private javax.swing.JLabel lblProm;
+    private javax.swing.JLabel lblState;
     private javax.swing.JLabel lblStudentFullName;
+    private javax.swing.JTable tblGrades;
     // End of variables declaration//GEN-END:variables
 }

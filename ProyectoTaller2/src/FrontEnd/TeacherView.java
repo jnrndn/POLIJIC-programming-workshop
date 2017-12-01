@@ -68,7 +68,6 @@ public class TeacherView extends javax.swing.JFrame {
         lblAvgP2 = new javax.swing.JLabel();
         lblAvgP1 = new javax.swing.JLabel();
         lblAvgS = new javax.swing.JLabel();
-        btbLookGeneralInfo = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -133,13 +132,6 @@ public class TeacherView extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Promedio seguimiento");
 
-        btbLookGeneralInfo.setText("Ver informacion general");
-        btbLookGeneralInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btbLookGeneralInfoActionPerformed(evt);
-            }
-        });
-
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +144,7 @@ public class TeacherView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,10 +176,8 @@ public class TeacherView extends javax.swing.JFrame {
                                             .addComponent(lblAvgP2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(57, 57, 57)
                                 .addComponent(btnTakeProm))))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(246, 246, 246)
-                        .addComponent(btbLookGeneralInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -222,9 +212,7 @@ public class TeacherView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAvgS, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btbLookGeneralInfo)
-                    .addComponent(btnSalir))
+                .addComponent(btnSalir)
                 .addContainerGap())
         );
 
@@ -239,7 +227,7 @@ public class TeacherView extends javax.swing.JFrame {
         if(this.cmbSubjects.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(null, "Por favor seleccione una asignatura de la lista");
         }else {
-            this.Limpiar(tblListbySubject);
+            this.Limpiar(this.tblListbySubject);
             DefaultTableModel model = (DefaultTableModel) this.tblListbySubject.getModel();
             this.teacher.getStudentsPerSubtject(this.cmbSubjects.getSelectedItem(), model);
             this.tblListbySubject.setVisible(true);
@@ -256,10 +244,6 @@ public class TeacherView extends javax.swing.JFrame {
             this.lblAvgS.setText(Float.toString(avgs[2]));
         }
     }//GEN-LAST:event_btnTakePromActionPerformed
-
-    private void btbLookGeneralInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLookGeneralInfoActionPerformed
-       this.dispose();
-    }//GEN-LAST:event_btbLookGeneralInfoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         String boton [] = {"Aceptar"};
@@ -319,7 +303,6 @@ public class TeacherView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btbLookGeneralInfo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnStudentList;
     private javax.swing.JButton btnTakeProm;

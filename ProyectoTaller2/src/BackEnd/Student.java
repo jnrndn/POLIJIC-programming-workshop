@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * <strong>Student</strong> class
@@ -88,7 +89,59 @@ public class Student {
     public ResultSet fillComboStudentSubjects(long id){
         return QueryService.selectSubjectsForStudent(this.con, id);
     }
+    
+    public void getExams(Object subject_name, DefaultTableModel model){
+        Object[] dataSet = new Object[2];
+        ResultSet rsE = QueryService.selectExams(this.con, this.id, this.getSubjectCode(subject_name.toString()));
+        try {
+            while(rsE.next()){
+                dataSet[0] = rsE.getString("PARCIAL_1");
+                dataSet[1] = rsE.getString("PARCIAL_2");
+                model.addRow(dataSet);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void getGrades(Object subject_name, DefaultTableModel model){
+        int i = 1;
+        Object data[] = null;
+        Object title = null;
+        ResultSet rsG = QueryService.selectGrades(this.con, this.getSubjectCode(subject_name.toString()));
+        try {
+            while(rsG.next()){
+                data[0] = rsG.getString("NOTA");
+                System.out.println(data[0]);
+                title = "Nota " + i + " - "+ rsG.getString("NOMBRE");
+                System.out.println();
+                model.addColumn(title ,data);
+                i++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
+        private int getSubjectCode(String subject_name){
+        int code = 0;
+        switch(subject_name){
+            case "Matematicas":
+                code = 001;
+                break;
+            case "Ciencias naturales":
+                code = 002;
+                break;
+            case "Humanidades":
+                code = 003;
+                break;
+            case "Etica":
+                code = 004;
+                break;
+        }
+        return code;
+    }
+        
     public long getId() {
         return id;
     }
