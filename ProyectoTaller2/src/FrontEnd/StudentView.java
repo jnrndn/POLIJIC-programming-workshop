@@ -240,7 +240,6 @@ public class StudentView extends javax.swing.JFrame {
             this.Limpiar(this.tblGrades);
             DefaultTableModel model = (DefaultTableModel) this.tblGrades.getModel();
             this.student.getExams(this.cmbSubjects.getSelectedItem(), model);
-            this.student.getGrades(this.cmbSubjects.getSelectedItem(), model);
             this.tblGrades.setVisible(true);
 
         }else {

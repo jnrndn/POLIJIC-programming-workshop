@@ -92,40 +92,36 @@ public class Student {
     
     public void getExams(Object subject_name, DefaultTableModel model){
         Object[] dataSet = new Object[2];
+        int cod_seguimiento = 0;
         ResultSet rsE = QueryService.selectExams(this.con, this.id, this.getSubjectCode(subject_name.toString()));
         try {
             while(rsE.next()){
                 dataSet[0] = rsE.getString("PARCIAL_1");
                 dataSet[1] = rsE.getString("PARCIAL_2");
+                cod_seguimiento = Integer.parseInt(rsE.getString("CODIGO_SEGUIMIENTO"));
                 model.addRow(dataSet);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    public void getGrades(Object subject_name, DefaultTableModel model){
         int i = 1;
-        Object data[] = null;
-        Object title = null;
-        ResultSet rsG = QueryService.selectGrades(this.con, this.getSubjectCode(subject_name.toString()));
+        ResultSet rsG = QueryService.selectGrades(this.con, cod_seguimiento );
         try {
             while(rsG.next()){
-                data[0] = rsG.getString("NOTA");
-                System.out.println(data[0]);
-                title = "Nota " + i + " - "+ rsG.getString("NOMBRE");
-                System.out.println();
-                model.addColumn(title ,data);
+                model.addColumn(
+                        "Nota " + i + " - "+ rsG.getString("NOMBRE"),
+                        new String[]{rsG.getString("NOTA")} 
+                );
                 i++;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-        private int getSubjectCode(String subject_name){
+    
+    private int getSubjectCode(String subject_name) {
         int code = 0;
-        switch(subject_name){
+        switch (subject_name) {
             case "Matematicas":
                 code = 001;
                 break;

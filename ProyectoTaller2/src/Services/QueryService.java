@@ -190,6 +190,7 @@ public class QueryService {
                     + "WHERE ID_ESTUDIANTE = " + id + " AND CODIGO_ASIGNATURA = " + cod
             );
         } catch (SQLException e) {
+            System.out.println("Error selectExams: " + e);
         }
         return rs;
     }
@@ -205,6 +206,7 @@ public class QueryService {
                     + "WHERE CODIGO_SEGUIMIENTO = " + cod
             );
         } catch (SQLException e) {
+            System.out.println("Error selectGrades: " + e);
         }
         return rs;
     }
