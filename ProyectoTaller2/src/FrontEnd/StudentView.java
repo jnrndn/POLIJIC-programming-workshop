@@ -8,6 +8,9 @@ package FrontEnd;
 import BackEnd.Student;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -236,19 +239,44 @@ public class StudentView extends javax.swing.JFrame {
 
     private void btnGetGradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetGradesActionPerformed
         this.Limpiar(this.tblGrades);
+        float avg = 0;
         if (this.cmbSubjects.getSelectedIndex() != 0) {
             this.Limpiar(this.tblGrades);
             DefaultTableModel model = (DefaultTableModel) this.tblGrades.getModel();
             this.student.getExams(this.cmbSubjects.getSelectedItem(), model);
             this.tblGrades.setVisible(true);
-
+            avg = this.student.calcAvegare(this.cmbSubjects.getSelectedItem());
+            this.lblProm.setText(Float.toString(avg));
+            if (avg >= 3){
+                this.lblState.setText("Aprovada");
+            }else {
+                this.lblState.setText("Reprovada");
+                this.lblCancel.setVisible(true);
+                this.btnCancel.setVisible(true);
+            }
+            
         }else {
             JOptionPane.showMessageDialog(null, "Por favor seleccione una asignatura de la lista");
         }
     }//GEN-LAST:event_btnGetGradesActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
+        int res = JOptionPane.showConfirmDialog(
+                null, 
+                "Esta seguro que desea cancelar " + this.cmbSubjects.getSelectedItem().toString() + "?",
+                "Precaucion! Esta accion no se puede deshacer",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+            );
+        if(res == 0){
+            String id = JOptionPane.showInputDialog(
+                null,
+                "Ingrese su numero de identificacion para continuar"
+            );
+            if(!"".equals(id)){
+                this.student.deleteSubject(this.cmbSubjects.getSelectedItem(), id);
+            }
+        }
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**

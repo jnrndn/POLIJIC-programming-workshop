@@ -210,6 +210,56 @@ public class QueryService {
         }
         return rs;
     }
-     
+    
+    public static ResultSet selectFollowUpCode(Connection con, long id, int cod) {
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                    "SELECT CODIGO_SEGUIMIENTO"
+                    + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
+                    + "WHERE ID_ESTUDIANTE = " + id + " AND CODIGO_ASIGNATURA = " + cod
+            );
+        } catch (SQLException e) {
+            System.out.println("Error selectFollowUpCode: " + e);
+        }
+        return rs;
+    }
+    
+    public static int deleteGrades(Connection con, int cod) {
+        int filas = 0;
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            filas = st.executeUpdate(
+                    "DELETE"
+                    + "FROM PROYECTOTALLER.TABLA_NOTA "
+                    + "WHERE CODIGO_SEGUIMIENTO = " + cod
+            );
+        } catch (SQLException e) {
+            System.out.println("Error deleteGrades: " + e);
+        }
+        return filas;
+    }
+    
+    public static int deleteSubject(Connection con, long id, int cod) {
+        int filas = 0;
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            filas = st.executeUpdate(
+                    "DELETE"
+                    + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
+                    + " WHERE ID_ESTUDIANTE = " + id + "AND CODIGO_ASIGNATURA = " + cod
+            );
+        } catch (SQLException e) {
+            System.out.println("Error deleteSubject: " + e);
+        }
+        return filas;
+    }
+    
     
 }
