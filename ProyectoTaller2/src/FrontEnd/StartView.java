@@ -28,6 +28,7 @@ public class StartView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.txtId.requestFocus();
         v.Numeros(this.txtId);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         //this.txtId.setTransferHandler(null);
     }
 
@@ -46,6 +47,11 @@ public class StartView extends javax.swing.JFrame {
         btnLogIn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Bienvenido");
@@ -122,6 +128,17 @@ public class StartView extends javax.swing.JFrame {
         }
         this.dispose();
     }//GEN-LAST:event_btnLogInActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        String boton [] = {"Aceptar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Titulo",
+                0, 0, null, boton, this);
+        if (eleccion == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }else if(eleccion == JOptionPane.NO_OPTION){
+            System.out.println("No se ha cerrado la aplicación");
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

@@ -69,8 +69,14 @@ public class TeacherView extends javax.swing.JFrame {
         lblAvgP1 = new javax.swing.JLabel();
         lblAvgS = new javax.swing.JLabel();
         btbLookGeneralInfo = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Bienvenido");
@@ -134,12 +140,19 @@ public class TeacherView extends javax.swing.JFrame {
             }
         });
 
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +186,9 @@ public class TeacherView extends javax.swing.JFrame {
                                 .addComponent(btnTakeProm))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
-                        .addComponent(btbLookGeneralInfo)))
+                        .addComponent(btbLookGeneralInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -207,7 +222,9 @@ public class TeacherView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAvgS, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(btbLookGeneralInfo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btbLookGeneralInfo)
+                    .addComponent(btnSalir))
                 .addContainerGap())
         );
 
@@ -242,9 +259,22 @@ public class TeacherView extends javax.swing.JFrame {
 
     private void btbLookGeneralInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLookGeneralInfoActionPerformed
        this.dispose();
-       Report list = new Report();
-       list.setVisible(true);
     }//GEN-LAST:event_btbLookGeneralInfoActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        //llamar metodo de salir --> esta en validaciones
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        String boton [] = {"Aceptar", "Cancelar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Titulo",
+                0, 0, null, boton, this);
+        if (eleccion == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }else if(eleccion == JOptionPane.NO_OPTION){
+            System.out.println("No se ha cerrado la aplicación");
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -283,6 +313,7 @@ public class TeacherView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btbLookGeneralInfo;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnStudentList;
     private javax.swing.JButton btnTakeProm;
     private javax.swing.JComboBox<String> cmbSubjects;
