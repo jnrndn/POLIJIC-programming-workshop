@@ -130,6 +130,11 @@ public class TeacherView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblListbySubject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblListbySubjectMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblListbySubject);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -294,6 +299,12 @@ public class TeacherView extends javax.swing.JFrame {
       
       
     }//GEN-LAST:event_btnUpdateMouseClicked
+
+    private void tblListbySubjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListbySubjectMouseClicked
+       Object id = this.tblListbySubject.getValueAt(this.tblListbySubject.getSelectedRow(), 0);
+       
+       System.out.println(id);
+    }//GEN-LAST:event_tblListbySubjectMouseClicked
 
     /**
      * @param args the command line arguments

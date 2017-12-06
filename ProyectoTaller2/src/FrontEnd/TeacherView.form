@@ -233,6 +233,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblListbySubjectMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
