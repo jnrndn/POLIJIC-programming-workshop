@@ -54,6 +54,8 @@ public class TeacherView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         lblTeacheName = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -70,6 +72,20 @@ public class TeacherView extends javax.swing.JFrame {
         lblAvgS = new javax.swing.JLabel();
         btbLookGeneralInfo = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        jB_update = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -147,6 +163,13 @@ public class TeacherView extends javax.swing.JFrame {
             }
         });
 
+        jB_update.setText("Actualizar");
+        jB_update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_updateMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,7 +206,9 @@ public class TeacherView extends javax.swing.JFrame {
                                             .addComponent(lblAvgS, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lblAvgP2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(57, 57, 57)
-                                .addComponent(btnTakeProm))))
+                                .addComponent(btnTakeProm)
+                                .addGap(42, 42, 42)
+                                .addComponent(jB_update))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
                         .addComponent(btbLookGeneralInfo)
@@ -218,7 +243,9 @@ public class TeacherView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAvgP2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTakeProm))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnTakeProm)
+                                .addComponent(jB_update)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAvgS, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
@@ -232,7 +259,7 @@ public class TeacherView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbSubjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSubjectsActionPerformed
-        
+    
     }//GEN-LAST:event_cmbSubjectsActionPerformed
 
     private void btnStudentListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentListActionPerformed
@@ -256,7 +283,7 @@ public class TeacherView extends javax.swing.JFrame {
             this.lblAvgS.setText(Float.toString(avgs[2]));
         }
     }//GEN-LAST:event_btnTakePromActionPerformed
-
+ 
     private void btbLookGeneralInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLookGeneralInfoActionPerformed
        this.dispose();
     }//GEN-LAST:event_btbLookGeneralInfoActionPerformed
@@ -275,6 +302,14 @@ public class TeacherView extends javax.swing.JFrame {
             System.out.println("No se ha cerrado la aplicación");
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void jB_updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_updateMouseClicked
+        int id;
+        UpdateStudent up = new UpdateStudent();
+        up.setVisible(true); 
+      
+      
+    }//GEN-LAST:event_jB_updateMouseClicked
 
     /**
      * @param args the command line arguments
@@ -317,12 +352,15 @@ public class TeacherView extends javax.swing.JFrame {
     private javax.swing.JButton btnStudentList;
     private javax.swing.JButton btnTakeProm;
     private javax.swing.JComboBox<String> cmbSubjects;
+    private javax.swing.JButton jB_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAvgP1;
     private javax.swing.JLabel lblAvgP2;
     private javax.swing.JLabel lblAvgS;

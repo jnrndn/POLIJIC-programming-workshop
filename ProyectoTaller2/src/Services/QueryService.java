@@ -161,4 +161,20 @@ public class QueryService {
         }
         return rs;
     }
+      public static ResultSet UptadeStudent(Connection con,int p1,int p2){
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                "UPTADE TABLA_SEGUIMIENTO SET  PARCIAL1=?, PARCIAL2=?  "
+               // + "WHERE ID_ESTUDIANTE="+ id
+            );
+            
+        } catch (SQLException e) {
+            System.out.println("Error UptadeStudent : " + e);
+        }
+        return rs;
+    }
+     
 }
