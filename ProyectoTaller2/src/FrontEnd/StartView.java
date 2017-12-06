@@ -113,25 +113,30 @@ public class StartView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
-        boolean isStudent = this.student.isStudent(Long.parseLong(this.txtId.getText()));
-        boolean isTeacher = this.teacher.isTeacher(Long.parseLong(this.txtId.getText()));
-        if (isStudent){
-            StudentView sv = new StudentView(this.student);
-            sv.setVisible(true);
+        if (!"".equals(this.txtId.getText())) {
+            boolean isStudent = this.student.isStudent(Long.parseLong(this.txtId.getText()));
+            boolean isTeacher = this.teacher.isTeacher(Long.parseLong(this.txtId.getText()));
+            if (isStudent) {
+                StudentView sv = new StudentView(this.student);
+                sv.setVisible(true);
+            }
+            if (isTeacher) {
+                TeacherView tv = new TeacherView(this.teacher);
+                tv.setVisible(true);
+            }
+            if (!isTeacher && !isStudent) {
+                JOptionPane.showMessageDialog(null, "Por favor ingrese una identificacion valida");
+            }
+            this.dispose();
+
+        }else {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese su identificacion");
         }
-        if (isTeacher) {
-            TeacherView tv = new TeacherView(this.teacher);
-            tv.setVisible(true);
-        } 
-        if(!isTeacher && !isStudent){
-            JOptionPane.showMessageDialog(null, "No se encontro el usuario");
-        }
-        this.dispose();
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         String boton [] = {"Aceptar", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Titulo",
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Salir",
                 0, 0, null, boton, this);
         if (eleccion == JOptionPane.YES_OPTION){
             System.exit(0);

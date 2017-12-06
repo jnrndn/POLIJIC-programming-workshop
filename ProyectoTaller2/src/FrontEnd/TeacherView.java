@@ -259,7 +259,7 @@ public class TeacherView extends javax.swing.JFrame {
         if(this.cmbSubjects.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(null, "Por favor seleccione una asignatura de la lista");
         }else {
-            this.Limpiar(tblListbySubject);
+            this.Limpiar(this.tblListbySubject);
             DefaultTableModel model = (DefaultTableModel) this.tblListbySubject.getModel();
             this.teacher.getStudentsPerSubtject(this.cmbSubjects.getSelectedItem(), model);
             this.tblListbySubject.setVisible(true);
@@ -276,14 +276,21 @@ public class TeacherView extends javax.swing.JFrame {
             this.lblAvgS.setText(Float.toString(avgs[2]));
         }
     }//GEN-LAST:event_btnTakePromActionPerformed
- 
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        //llamar metodo de salir --> esta en validaciones
+        String boton [] = {"Aceptar"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea cerrar sesión?", "Cerrar sesión",
+                0, 0, null, boton, this);
+        if (eleccion == JOptionPane.YES_OPTION){
+            this.dispose();
+            StartView startview = new StartView();
+            startview.setVisible(true);
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         String boton [] = {"Aceptar", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Titulo",
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Seguro que desea salir de la aplicación?", "Salir",
                 0, 0, null, boton, this);
         if (eleccion == JOptionPane.YES_OPTION){
             System.exit(0);

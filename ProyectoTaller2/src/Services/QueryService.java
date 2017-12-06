@@ -86,6 +86,24 @@ public class QueryService {
         }
         return rs;
     }
+    
+    public static ResultSet selectSubjectsForStudent(Connection con, long id){
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                "SELECT A.NOMBRE " +
+                "FROM PROYECTOTALLER.TABLA_ASIGNATURA A INNER JOIN PROYECTOTALLER.TABLA_SEGUIMIENTO S " +
+                "ON S.CODIGO_ASIGNATURA = A.CODIGO_ASIGNATURA " +
+                "WHERE S.ID_ESTUDIANTE = " + id
+            );
+            
+        } catch (SQLException e) {
+            System.out.println("Error selectSubjectsForTeacher: " + e);
+        }
+        return rs;
+    }
 
     public static ResultSet selectGradesBySubject(Connection con) {
         ResultSet rs = null;
@@ -143,7 +161,6 @@ public class QueryService {
         return rs;
     }
      
-     
      public static ResultSet selectAverageGrades(Connection con, int codigoA ){
         ResultSet rs = null;
         try {
@@ -161,6 +178,90 @@ public class QueryService {
         }
         return rs;
     }
+     
+    public static ResultSet selectExams(Connection con, long id, int cod) {
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                    "SELECT CODIGO_SEGUIMIENTO, PARCIAL_1, PARCIAL_2 "
+                    + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
+                    + "WHERE ID_ESTUDIANTE = " + id + " AND CODIGO_ASIGNATURA = " + cod
+            );
+        } catch (SQLException e) {
+            System.out.println("Error selectExams: " + e);
+        }
+        return rs;
+    }
+    
+    public static ResultSet selectGrades(Connection con, int cod) {
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                    "SELECT CODIGO_NOTA, NOMBRE, NOTA "
+                    + "FROM PROYECTOTALLER.TABLA_NOTA "
+                    + "WHERE CODIGO_SEGUIMIENTO = " + cod
+            );
+        } catch (SQLException e) {
+            System.out.println("Error selectGrades: " + e);
+        }
+        return rs;
+    }
+    
+    public static ResultSet selectFollowUpCode(Connection con, long id, int cod) {
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            rs = st.executeQuery(
+                    "SELECT CODIGO_SEGUIMIENTO"
+                    + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
+                    + "WHERE ID_ESTUDIANTE = " + id + " AND CODIGO_ASIGNATURA = " + cod
+            );
+        } catch (SQLException e) {
+            System.out.println("Error selectFollowUpCode: " + e);
+        }
+        return rs;
+    }
+    
+    public static int deleteGrades(Connection con, int cod) {
+        int filas = 0;
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            filas = st.executeUpdate(
+                    "DELETE"
+                    + "FROM PROYECTOTALLER.TABLA_NOTA "
+                    + "WHERE CODIGO_SEGUIMIENTO = " + cod
+            );
+        } catch (SQLException e) {
+            System.out.println("Error deleteGrades: " + e);
+        }
+        return filas;
+    }
+    
+    public static int deleteSubject(Connection con, long id, int cod) {
+        int filas = 0;
+        ResultSet rs = null;
+        try {
+            Statement st;
+            st = con.createStatement();
+            filas = st.executeUpdate(
+                    "DELETE"
+                    + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
+                    + " WHERE ID_ESTUDIANTE = " + id + "AND CODIGO_ASIGNATURA = " + cod
+            );
+        } catch (SQLException e) {
+            System.out.println("Error deleteSubject: " + e);
+        }
+        return filas;
+    }
+    
+    
       public static ResultSet UptadeStudent(Connection con,int p1,int p2){
         ResultSet rs = null;
         try {
