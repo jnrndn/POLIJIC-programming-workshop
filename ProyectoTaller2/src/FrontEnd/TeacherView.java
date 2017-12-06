@@ -70,9 +70,8 @@ public class TeacherView extends javax.swing.JFrame {
         lblAvgP2 = new javax.swing.JLabel();
         lblAvgP1 = new javax.swing.JLabel();
         lblAvgS = new javax.swing.JLabel();
-        btbLookGeneralInfo = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jB_update = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -149,13 +148,6 @@ public class TeacherView extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Promedio seguimiento");
 
-        btbLookGeneralInfo.setText("Ver informacion general");
-        btbLookGeneralInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btbLookGeneralInfoActionPerformed(evt);
-            }
-        });
-
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,10 +155,10 @@ public class TeacherView extends javax.swing.JFrame {
             }
         });
 
-        jB_update.setText("Actualizar");
-        jB_update.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnUpdate.setText("Actualizar");
+        btnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jB_updateMouseClicked(evt);
+                btnUpdateMouseClicked(evt);
             }
         });
 
@@ -175,7 +167,7 @@ public class TeacherView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,11 +200,9 @@ public class TeacherView extends javax.swing.JFrame {
                                 .addGap(57, 57, 57)
                                 .addComponent(btnTakeProm)
                                 .addGap(42, 42, 42)
-                                .addComponent(jB_update))))
-                    .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnUpdate))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(246, 246, 246)
-                        .addComponent(btbLookGeneralInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -245,13 +235,11 @@ public class TeacherView extends javax.swing.JFrame {
                             .addComponent(lblAvgP2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnTakeProm)
-                                .addComponent(jB_update)))
+                                .addComponent(btnUpdate)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAvgS, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btbLookGeneralInfo)
-                    .addComponent(btnSalir))
+                .addComponent(btnSalir)
                 .addContainerGap())
         );
 
@@ -284,10 +272,6 @@ public class TeacherView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTakePromActionPerformed
  
-    private void btbLookGeneralInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLookGeneralInfoActionPerformed
-       this.dispose();
-    }//GEN-LAST:event_btbLookGeneralInfoActionPerformed
-
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         //llamar metodo de salir --> esta en validaciones
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -303,13 +287,13 @@ public class TeacherView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void jB_updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_updateMouseClicked
+    private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
         int id;
         UpdateStudent up = new UpdateStudent();
         up.setVisible(true); 
       
       
-    }//GEN-LAST:event_jB_updateMouseClicked
+    }//GEN-LAST:event_btnUpdateMouseClicked
 
     /**
      * @param args the command line arguments
@@ -347,12 +331,11 @@ public class TeacherView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btbLookGeneralInfo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnStudentList;
     private javax.swing.JButton btnTakeProm;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbSubjects;
-    private javax.swing.JButton jB_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
