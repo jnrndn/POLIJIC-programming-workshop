@@ -254,7 +254,7 @@ public class TeacherView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtIdupdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnUpdate)
                                     .addComponent(btnTakeProm))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
@@ -335,8 +335,8 @@ public class TeacherView extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         String id= this.txtIdupdate.getText();
-        long subject = this.teacher.getSubjectCode(this.cmbSubjects.getSelectedItem().toString());
-        Updtate up= new Updtate(id,subject);
+        int subject = this.teacher.getSubjectCode(this.cmbSubjects.getSelectedItem().toString());
+        Updtate up= new Updtate(id,subject, this.teacher);
         up.setVisible(true);
         this.dispose();
         

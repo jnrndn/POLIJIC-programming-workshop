@@ -178,10 +178,10 @@ public class Teacher {
     }
     
     
-     public void getUpdateExams(int subject_name, DefaultTableModel model,long id){
+    public void getUpdateExams(int subject_name, DefaultTableModel model, long id){
         Object[] dataSet = new Object[2];
         int cod_seguimiento = 0;
-        ResultSet rsE = QueryService.selectFollowUpCode(this.con, this.id, subject_name);
+        ResultSet rsE = QueryService.selectFollowUpCode(this.con, id, subject_name);
         try {
             while(rsE.next()){
                 dataSet[0] = rsE.getString("PARCIAL_1");

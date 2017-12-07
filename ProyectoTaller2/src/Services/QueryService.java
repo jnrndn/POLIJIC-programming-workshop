@@ -217,7 +217,7 @@ public class QueryService {
             Statement st;
             st = con.createStatement();
             rs = st.executeQuery(
-                    "SELECT CODIGO_SEGUIMIENTO, PARCIAL_1, PARCIAL_2"
+                    "SELECT CODIGO_SEGUIMIENTO, PARCIAL_1, PARCIAL_2 "
                     + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
                     + "WHERE ID_ESTUDIANTE = " + id + " AND CODIGO_ASIGNATURA = " + cod
             );

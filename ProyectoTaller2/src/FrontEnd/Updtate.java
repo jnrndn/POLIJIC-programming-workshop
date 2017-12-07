@@ -19,11 +19,14 @@ public class Updtate extends javax.swing.JFrame {
   
     /**
      * Creates new form Updtate
+     * @param id
+     * @param cod
      */
-    public Updtate(String id,int cod) {
+    public Updtate(String id,int cod, Teacher teacher) {
+        this.teacher = teacher;
         initComponents();
-         DefaultTableModel model = (DefaultTableModel) this.tblGrades.getModel();
-         this.teacher.getUpdateExams(cod ,model, Long.parseLong(id));
+        DefaultTableModel model = (DefaultTableModel) this.tblGrades.getModel();
+        this.teacher.getUpdateExams(cod ,model, Long.parseLong(id));
     }
 
     private Updtate() {
