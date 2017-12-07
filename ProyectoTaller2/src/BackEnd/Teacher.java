@@ -176,7 +176,12 @@ public class Teacher {
     public void setCon(Connection con) {
         this.con = con;
     }
-    
+    public int insertGrade(int cod, String nombre, float nota, int codSegui) {
+        
+        return  QueryService.InsertGradreStudent(con, cod, nombre, nota, codSegui);
+        
+    }
+
     
     public void getUpdateExams(int subject_name, DefaultTableModel model, long id){
         Object[] dataSet = new Object[2];

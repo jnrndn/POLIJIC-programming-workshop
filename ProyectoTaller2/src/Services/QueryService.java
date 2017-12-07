@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  * <strong>QueryService</strong> class<br>
@@ -264,20 +265,17 @@ public class QueryService {
     }
     
     
-      public static ResultSet UptadeStudent(Connection con,int p1,int p2){
-        ResultSet rs = null;
+     public static int InsertGradreStudent(Connection con, int cod, String nombre, float nota, int codSegui) {
+        int filas = 0;
         try {
             Statement st;
+            String sql = "INSERT INTO PROYECTOTALLER.TABLA_NOTAS VALUES("+ cod +",'" +nombre +"',"+ nota +","+codSegui+")";
             st = con.createStatement();
-            rs = st.executeQuery(
-                "UPTADE TABLA_SEGUIMIENTO SET  PARCIAL1=?, PARCIAL2=?  "
-               // + "WHERE ID_ESTUDIANTE="+ id
-            );
-            
+            filas = st.executeUpdate(sql);
         } catch (SQLException e) {
-            System.out.println("Error UptadeStudent : " + e);
+
         }
-        return rs;
+        return filas;
     }
-     
+
 }
