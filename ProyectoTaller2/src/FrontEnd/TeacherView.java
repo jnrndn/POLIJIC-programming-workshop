@@ -72,6 +72,7 @@ public class TeacherView extends javax.swing.JFrame {
         lblAvgS = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        txtIdupdate = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,6 +167,17 @@ public class TeacherView extends javax.swing.JFrame {
                 btnUpdateMouseClicked(evt);
             }
         });
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        txtIdupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdupdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,10 +214,12 @@ public class TeacherView extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblAvgS, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lblAvgP2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(57, 57, 57)
+                                .addGap(52, 52, 52)
                                 .addComponent(btnTakeProm)
-                                .addGap(42, 42, 42)
-                                .addComponent(btnUpdate))))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                                    .addComponent(txtIdupdate)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(246, 246, 246)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -232,20 +246,25 @@ public class TeacherView extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAvgP2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnTakeProm)
-                                .addComponent(btnUpdate)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtIdupdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnUpdate)
+                                    .addComponent(btnTakeProm))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addComponent(btnSalir)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAvgP2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAvgS, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(btnSalir)
-                .addContainerGap())
+                        .addComponent(lblAvgS, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13))))
         );
 
         pack();
@@ -300,18 +319,28 @@ public class TeacherView extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
-        int id;
-        UpdateStudent up = new UpdateStudent();
-        up.setVisible(true); 
-      
+        
       
     }//GEN-LAST:event_btnUpdateMouseClicked
 
     private void tblListbySubjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListbySubjectMouseClicked
        Object id = this.tblListbySubject.getValueAt(this.tblListbySubject.getSelectedRow(), 0);
        
-       System.out.println(id);
+       this.txtIdupdate.setText((String) id);
     }//GEN-LAST:event_tblListbySubjectMouseClicked
+
+    private void txtIdupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdupdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdupdateActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        String id= this.txtIdupdate.getText();
+        long subject = this.teacher.getSubjectCode(this.cmbSubjects.getSelectedItem().toString());
+        Updtate up= new Updtate(id,subject);
+        up.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,5 +396,6 @@ public class TeacherView extends javax.swing.JFrame {
     private javax.swing.JLabel lblAvgS;
     private javax.swing.JLabel lblTeacheName;
     private javax.swing.JTable tblListbySubject;
+    private javax.swing.JTextField txtIdupdate;
     // End of variables declaration//GEN-END:variables
 }
