@@ -101,7 +101,7 @@ public class Teacher {
         return avgs;
     }
     
-    private int getSubjectCode(String subject_name){
+    public int getSubjectCode(String subject_name){
         int code = 0;
         switch(subject_name){
             case "Matematicas":
@@ -149,6 +149,7 @@ public class Teacher {
     }
 
     public void setTelefono(int telefono) {
+     
         this.telefono = telefono;
     }
 
@@ -175,5 +176,41 @@ public class Teacher {
     public void setCon(Connection con) {
         this.con = con;
     }
+    public int insertGrade(int cod, String nombre, float nota, int codSegui) {
+        
+        return  QueryService.InsertGradreStudent(con, cod, nombre, nota, codSegui);
+        
+    }
+
+    
+    public void getUpdateExams(int subject_name, DefaultTableModel model, long id){
+        Object[] dataSet = new Object[2];
+        int cod_seguimiento = 0;
+        ResultSet rsE = QueryService.selectFollowUpCode(this.con, id, subject_name);
+        try {
+            while(rsE.next()){
+                dataSet[0] = rsE.getString("PARCIAL_1");
+                dataSet[1] = rsE.getString("PARCIAL_2");
+                cod_seguimiento = Integer.parseInt(rsE.getString("CODIGO_SEGUIMIENTO"));
+                model.addRow(dataSet);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int i = 1;
+        ResultSet rsG = QueryService.selectGrades(this.con, cod_seguimiento );
+        try {
+            while(rsG.next()){
+                model.addColumn(
+                        "Nota " + i + " - "+ rsG.getString("NOMBRE"),
+                        new String[]{rsG.getString("NOTA")} 
+                );
+                i++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   
     
 }

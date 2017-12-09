@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  * <strong>QueryService</strong> class<br>
@@ -217,7 +218,7 @@ public class QueryService {
             Statement st;
             st = con.createStatement();
             rs = st.executeQuery(
-                    "SELECT CODIGO_SEGUIMIENTO"
+                    "SELECT CODIGO_SEGUIMIENTO, PARCIAL_1, PARCIAL_2 "
                     + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
                     + "WHERE ID_ESTUDIANTE = " + id + " AND CODIGO_ASIGNATURA = " + cod
             );
@@ -226,6 +227,8 @@ public class QueryService {
         }
         return rs;
     }
+    
+ 
     
     public static int deleteGrades(Connection con, int cod) {
         int filas = 0;
@@ -262,4 +265,17 @@ public class QueryService {
     }
     
     
+     public static int InsertGradreStudent(Connection con, int cod, String nombre, float nota, int codSegui) {
+        int filas = 0;
+        try {
+            Statement st;
+            String sql = "INSERT INTO PROYECTOTALLER.TABLA_NOTAS VALUES("+ cod +",'" +nombre +"',"+ nota +","+codSegui+")";
+            st = con.createStatement();
+            filas = st.executeUpdate(sql);
+        } catch (SQLException e) {
+
+        }
+        return filas;
+    }
+
 }

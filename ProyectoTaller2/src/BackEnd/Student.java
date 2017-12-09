@@ -133,6 +133,8 @@ public class Student {
         }
     }
     
+ 
+    
     public float calcAvegare(Object subject_name){
         int cod_seguimiento = 0;
         float p1 = 0, p2 = 0, g = 0;
