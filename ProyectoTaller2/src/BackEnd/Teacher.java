@@ -211,6 +211,17 @@ public class Teacher {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
     
+    public int getStudentFollowUpCode(long id , int code){
+        ResultSet rs = QueryService.selectFollowUpCode(con, id, code);
+        int SubjectCode = 0;
+        try {
+            while(rs.next()){
+                SubjectCode = Integer.parseInt(rs.getString("CODIGO_SEGUIMIENTO"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Teacher.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return SubjectCode;
+    }
 }

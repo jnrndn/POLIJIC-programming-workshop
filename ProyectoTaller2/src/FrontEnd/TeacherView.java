@@ -335,10 +335,10 @@ public class TeacherView extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         String id= this.txtIdupdate.getText();
-        int subject = this.teacher.getSubjectCode(this.cmbSubjects.getSelectedItem().toString());
-        Updtate up= new Updtate(id,subject, this.teacher);
+        int subjectCode = this.teacher.getSubjectCode(this.cmbSubjects.getSelectedItem().toString());
+        int subjectId = this.teacher.getStudentFollowUpCode(Long.parseLong(id), subjectCode);
+        Updtate up= new Updtate(id,subjectId, subjectCode, this.teacher);
         up.setVisible(true);
-        this.dispose();
         
     }//GEN-LAST:event_btnUpdateActionPerformed
 

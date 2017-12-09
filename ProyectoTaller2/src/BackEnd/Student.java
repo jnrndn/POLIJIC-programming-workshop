@@ -187,11 +187,11 @@ public class Student {
             int rows1 = QueryService.deleteSubject(this.con, this.id, cod_seguimiento);
             if(rows1 != 0){
                 JOptionPane.showConfirmDialog(
-                null,
-                 subject_name.toString() +" ha sido cancelada exitosamente",
-                "Alerta!",
-                JOptionPane.WARNING_MESSAGE
-            );
+                    null,
+                    subject_name.toString() + " ha sido cancelada exitosamente",
+                    "Alerta!",
+                    JOptionPane.WARNING_MESSAGE
+                );
             }
         }
     }

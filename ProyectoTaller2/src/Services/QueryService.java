@@ -269,7 +269,7 @@ public class QueryService {
         int filas = 0;
         try {
             Statement st;
-            String sql = "INSERT INTO PROYECTOTALLER.TABLA_NOTAS VALUES("+ cod +",'" +nombre +"',"+ nota +","+codSegui+")";
+            String sql = "INSERT INTO PROYECTOTALLER.TABLA_NOTA VALUES("+ cod +",'" +nombre +"',"+ nota +","+codSegui+")";
             st = con.createStatement();
             filas = st.executeUpdate(sql);
         } catch (SQLException e) {
