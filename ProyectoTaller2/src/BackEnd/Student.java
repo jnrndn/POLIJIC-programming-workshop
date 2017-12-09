@@ -137,12 +137,16 @@ public class Student {
     
     public float calcAvegare(Object subject_name){
         int cod_seguimiento = 0;
-        float p1 = 0, p2 = 0, g = 0;
+        float p1 = -1, p2 = -1, g = -1, avgs = 0;
         ResultSet rsEx = QueryService.selectExams(this.con, this.id, this.getSubjectCode(subject_name.toString()));
         try {
             while(rsEx.next()){
-                p1 = Float.parseFloat(rsEx.getString("PARCIAL_1"));
-                p2 = Float.parseFloat(rsEx.getString("PARCIAL_2"));
+                if (rsEx.getString("PARCIAL_1") != null) {
+                    p1 = Float.parseFloat(rsEx.getString("PARCIAL_1"));
+                }
+                if (rsEx.getString("PARCIAL_2") != null) {
+                    p2 = Float.parseFloat(rsEx.getString("PARCIAL_2"));
+                }
                 cod_seguimiento = Integer.parseInt(rsEx.getString("CODIGO_SEGUIMIENTO"));
             }
         } catch (SQLException ex) {
@@ -160,8 +164,28 @@ public class Student {
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
-        float avg = (((p1+p2)/2) + (g/i))/2;
-        return avg;
+        if(p1 == -1){
+            if(g == -1){g = 0;}
+            avgs = (float) (p2*0.25 + (g/i));
+        }
+        if(p2 == -1){
+            if(g == -1){g = 0;}
+            avgs = (float) (p1*0.25 + (g/i));
+        }
+        
+        if (p1 == -1 && p2 == -1){
+            avgs = g/i;
+        }
+        if (g == -1){
+            avgs = (p1+p2)/2;
+        }
+        if (p1 != -1  && p2 != -1 && g!= -1 ){
+            avgs = -1;
+        }else {
+            avgs = (((p1+p2)/2) + (g/i))/2;
+        }
+        
+        return avgs;
     }
     
     public void deleteSubject(Object subject_name, String id) {
