@@ -133,7 +133,11 @@ public class Student {
         }
     }
     
- 
+    /**
+     * This method calculate the average grade
+     * @param subject_name
+     * @return average grade
+     */
     
     public float calcAvegare(Object subject_name){
         int cod_seguimiento = 0;
@@ -164,6 +168,12 @@ public class Student {
         return avg;
     }
     
+    /**
+     * This method get the logic to cancel a subject when average grade is
+     * lower than 3
+     * @param subject_name
+     * @param id 
+     */
     public void deleteSubject(Object subject_name, String id) {
         //Verify input id be the same as current session id
         if (Long.parseLong(id) != this.id) {

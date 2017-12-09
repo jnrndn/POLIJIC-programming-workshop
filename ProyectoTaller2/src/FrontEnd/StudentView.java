@@ -250,7 +250,7 @@ public class StudentView extends javax.swing.JFrame {
             if (avg >= 3){
                 this.lblState.setText("Aprobada");
             }else {
-                this.lblState.setText("Reprovada");
+                this.lblState.setText("Reprobada");
                 this.lblCancel.setVisible(true);
                 this.btnCancel.setVisible(true);
             }

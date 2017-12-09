@@ -15,8 +15,11 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author jnjre
+ * <strong>Teacher</strong> class
+ * This class contains all methods
+ * related to teahcer role
+ * @author Juan José Rendón
+ * @version 0.1.0 November 2017
  */
 public class Teacher {
 
@@ -27,11 +30,23 @@ public class Teacher {
     private String correo;
     private String profesion;
     private Connection con;
-
+    
+    /**
+     * Constructor by default
+     */
     public Teacher() {
         this.getConnection();
     }
-
+    
+    /**
+     * Constructor overload
+     * @param id
+     * @param nombre
+     * @param apellido
+     * @param telefono
+     * @param correo
+     * @param profesion 
+     */
     public Teacher(long id, String nombre, String apellido, int telefono, String correo, String profesion) {
         this.id = id;
         this.nombre = nombre;
@@ -44,7 +59,11 @@ public class Teacher {
     private void getConnection(){
         this.con = ConnectionService.connect();
     }
-    
+    /**
+     * This method validate if the input id belongs to a teacher
+     * @param id
+     * @return true if is teacher
+     */
     public boolean isTeacher(long id){
         ResultSet rs = QueryService.selectTeacher(this.con, id);
         boolean isTeacher = false;
@@ -63,11 +82,20 @@ public class Teacher {
         return isTeacher;
     }
 
-    
+    /**
+     * This method fill the combo with all teahcer's subjects
+     * @param id
+     * @return  ResultSet with subjects
+     */
     public ResultSet fillComboSubjects(long id){
         return QueryService.selectSubjectsForTeacher(this.con, id);
     }
     
+    /**
+     * This method fill the table with all students enrrolled in a subjects
+     * @param name
+     * @param model 
+     */
     public void getStudentsPerSubtject(Object name, DefaultTableModel model){
         int code = this.getSubjectCode(name.toString());
         Object[] dataSet = new Object[3];
@@ -84,6 +112,11 @@ public class Teacher {
         }
     }
     
+    /**
+     * This method calculate the average grade for the entire enrrolled students
+     * @param name
+     * @return array with average of partial 1, partial 2 and grades
+     */
     public float[] getAverageGrades(Object name){
         int code = this.getSubjectCode(name.toString());
         
@@ -101,6 +134,11 @@ public class Teacher {
         return avgs;
     }
     
+    /**
+     * Method to know what's the subject code
+     * @param subject_name
+     * @return code of a subject
+     */
     public int getSubjectCode(String subject_name){
         int code = 0;
         switch(subject_name){
@@ -176,13 +214,28 @@ public class Teacher {
     public void setCon(Connection con) {
         this.con = con;
     }
+    
+    /**
+     * Method to call queryservice and give all params needed
+     * @param cod
+     * @param nombre
+     * @param nota
+     * @param codSegui
+     * @return integer if update was succesfull
+     */
     public int insertGrade(int cod, String nombre, float nota, int codSegui) {
         
         return  QueryService.InsertGradreStudent(con, cod, nombre, nota, codSegui);
         
     }
 
-    
+    /**
+     * Method to update students grades
+     * this method will be used in the next version of the application
+     * @param subject_name
+     * @param model
+     * @param id 
+     */
     public void getUpdateExams(int subject_name, DefaultTableModel model, long id){
         Object[] dataSet = new Object[2];
         int cod_seguimiento = 0;
@@ -212,6 +265,12 @@ public class Teacher {
         }
     }
     
+    /**
+     * Method to get the followup code of an student
+     * @param id
+     * @param code
+     * @return followup code
+     */
     public int getStudentFollowUpCode(long id , int code){
         ResultSet rs = QueryService.selectFollowUpCode(con, id, code);
         int SubjectCode = 0;

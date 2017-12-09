@@ -237,10 +237,11 @@ public class QueryService {
             Statement st;
             st = con.createStatement();
             filas = st.executeUpdate(
-                    "DELETE"
+                    "DELETE "
                     + "FROM PROYECTOTALLER.TABLA_NOTA "
-                    + "WHERE CODIGO_SEGUIMIENTO = " + cod
+                    + "WHERE TABLA_NOTA.CODIGO_SEGUIMIENTO = " + cod
             );
+            con.commit();
         } catch (SQLException e) {
             System.out.println("Error deleteGrades: " + e);
         }
@@ -254,10 +255,11 @@ public class QueryService {
             Statement st;
             st = con.createStatement();
             filas = st.executeUpdate(
-                    "DELETE"
+                    "DELETE "
                     + "FROM PROYECTOTALLER.TABLA_SEGUIMIENTO "
                     + " WHERE ID_ESTUDIANTE = " + id + "AND CODIGO_ASIGNATURA = " + cod
             );
+            con.commit();
         } catch (SQLException e) {
             System.out.println("Error deleteSubject: " + e);
         }
