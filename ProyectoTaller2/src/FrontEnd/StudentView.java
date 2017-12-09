@@ -247,7 +247,9 @@ public class StudentView extends javax.swing.JFrame {
             this.tblGrades.setVisible(true);
             avg = this.student.calcAvegare(this.cmbSubjects.getSelectedItem());
             this.lblProm.setText(Float.toString(avg));
-            if (avg >= 3){
+            if(avg == -1){
+                this.lblProm.setText("No tiene notas");
+            }else if (avg >= 3){
                 this.lblState.setText("Aprobada");
             }else {
                 this.lblState.setText("Reprobada");
